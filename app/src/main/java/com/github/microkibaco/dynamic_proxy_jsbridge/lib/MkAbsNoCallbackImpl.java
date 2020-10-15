@@ -8,10 +8,15 @@ import androidx.appcompat.app.AppCompatActivity;
  * @Tel: 18390833563
  * @function description:
  */
-public class AbsMkNoCallbackImpl {
+public class MkAbsNoCallbackImpl {
 
     protected AppCompatActivity activity;
-    public AbsMkNoCallbackImpl(AppCompatActivity activity) {
+
+    /**
+     * 没有回调的AppCompatActivity 实现
+     * @param activity activity上下文
+     */
+    public MkAbsNoCallbackImpl(AppCompatActivity activity) {
         this.activity = activity;
         if(activity == null){
             // rn可以传null,自动获取上层activity

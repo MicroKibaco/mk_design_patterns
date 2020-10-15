@@ -6,6 +6,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.webkit.WebView;
 
+import com.github.microkibaco.dynamic_proxy_jsbridge.lib.interfc.ImkBridgeHelper;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -33,49 +35,46 @@ public class MkWebBridgeUtil {
 
     public static void callback(final WebView webView, String funcName, MkResponse response){
         if (webView == null ) {
-            Log.w(TAG,"webView == null,"+funcName);
+            Log.d(TAG,"webView == null,"+funcName);
             return;
         }
 
         if (TextUtils.isEmpty(funcName)) {
-            Log.w(TAG,"TextUtils.isEmpty(funcName)");
+            Log.d(TAG,"TextUtils.isEmpty(funcName)");
             return;
         }
         String json = getHelper().toJson(response);
-        Log.w(TAG,json);
+        Log.d(TAG,json);
         final String func = funcName+"("+json+")";
 
 
-        //webView.getjsobj.getjsHandler.cancelTimeoutCountWhenFinish(finalCallbackName);
+
         // 执行JS调用
-        webView.post(new Runnable() {
-            @Override
-            public void run() {
-                webView.loadUrl("javascript:" + func);
-                Log.i(TAG, "android call js back  "+func);
-            }
+        webView.post(() -> {
+            webView.loadUrl("javascript:" + func);
+            Log.d(TAG, "android call js back  "+func);
         });
     }
 
     public static void callbackWithJson(final WebView webView, String funcName, String  json){
         if (webView == null ) {
-            Log.w(TAG,"webView == null,"+funcName);
+            Log.d(TAG,"webView == null,"+funcName);
             return;
         }
 
         if (TextUtils.isEmpty(funcName)) {
-            Log.w(TAG,"TextUtils.isEmpty(funcName)");
+            Log.d(TAG,"TextUtils.isEmpty(funcName)");
             return;
         }
         Log.w(TAG,json);
         final String func = funcName+"("+json+")";
 
 
-        //webView.getjsobj.getjsHandler.cancelTimeoutCountWhenFinish(finalCallbackName);
+
         // 执行JS调用
         webView.post(() -> {
             webView.loadUrl("javascript:" + func);
-            Log.i(TAG, "android call js back  "+func);
+            Log.d(TAG, "android call js back  "+func);
         });
     }
 
